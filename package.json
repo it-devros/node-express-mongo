@@ -1,0 +1,32 @@
+{
+  "name": "lifewatchingcloud-api",
+  "version": "0.1.0",
+  "description": "this is the api server for lifewatchingcloud",
+  "author": "dracula",
+  "private": true,
+  "scripts": {
+    "start": "npm run server",
+    "server": "node app.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "crypto": "^1.0.1",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.16",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
