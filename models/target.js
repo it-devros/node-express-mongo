@@ -4,27 +4,38 @@ const HashPass = require('../libs/HashPass')
 let Schema = mongoose.Schema
 
 let schema = new Schema({
-	userID : {
+	user_ID : {
 		type : String,
-		required : true
+		required : false
  	},
-	username : {
-		type : String,
-		required : true
+  sensors : {
+		type : Array,
+		required : false
  	},
-	email : {
-		 type : String,
-		 required : true
-	},
-	password : {
-		 type : String,
-		 required : true
-	},
-	role : {
-		type : Boolean,
-		required : false,
-		default : 'user'
-	},
+  weight_scale : {
+		type : Object,
+		required : false
+  },
+  blood_pressure : {
+		type : Array,
+		required : false
+  },
+  thermometer : {
+		type : Object,
+		required : false
+  },
+  activity_amount : {
+		type : Object,
+		required : false
+  },
+  sleep : {
+		type : Object,
+		required : false
+  },
+  motion : {
+		type : Object,
+		required : false
+ 	},
 	created_at : {
 		type : Date,
 		required : false,
@@ -40,17 +51,9 @@ let schema = new Schema({
 
 
 schema.pre('save', function (next) {
-	if(this.isModified('password')) {
-		this.password = HashPass.createHash(this.password)
-	}
 	this.updated_at = new Date()
 	return next()
 })
-
-
-schema.methods.comparePassword = function (password) {
-	return HashPass.validateHash(this.password, password)
-}
 
 
 schema.statics.load = function (criteria, select) {
@@ -67,4 +70,4 @@ schema.statics.list = function (options) {
 }
 
 
-module.exports = mongoose.model('User', schema)
+module.exports = mongoose.model('Target', schema)

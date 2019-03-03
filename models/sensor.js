@@ -4,27 +4,38 @@ const HashPass = require('../libs/HashPass')
 let Schema = mongoose.Schema
 
 let schema = new Schema({
-	userID : {
+	name : {
 		type : String,
 		required : true
  	},
-	username : {
-		type : String,
-		required : true
+  temperature : {
+		type : Object,
+		required : false
  	},
-	email : {
-		 type : String,
-		 required : true
-	},
-	password : {
-		 type : String,
-		 required : true
-	},
-	role : {
-		type : Boolean,
-		required : false,
-		default : 'user'
-	},
+  humidity : {
+		type : Object,
+		required : false
+  },
+  illuminance : {
+		type : Object,
+		required : false
+  },
+  acceleration : {
+		type : Object,
+		required : false
+  },
+  odor : {
+		type : Object,
+		required : false
+  },
+  noise : {
+		type : Object,
+		required : false
+  },
+  atmospheric_pressure : {
+		type : Object,
+		required : false
+ 	},
 	created_at : {
 		type : Date,
 		required : false,
@@ -40,17 +51,9 @@ let schema = new Schema({
 
 
 schema.pre('save', function (next) {
-	if(this.isModified('password')) {
-		this.password = HashPass.createHash(this.password)
-	}
 	this.updated_at = new Date()
 	return next()
 })
-
-
-schema.methods.comparePassword = function (password) {
-	return HashPass.validateHash(this.password, password)
-}
 
 
 schema.statics.load = function (criteria, select) {
@@ -67,4 +70,4 @@ schema.statics.list = function (options) {
 }
 
 
-module.exports = mongoose.model('User', schema)
+module.exports = mongoose.model('Sensor', schema)
