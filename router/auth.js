@@ -5,19 +5,19 @@ const isAuth = require('../middleware/isAuth')
 let authController = require('../controllers/authController')
 
 const runAction =  (action, req, res) => {
-	action(req, res)
-		.then((data) => {
-			res.status(200).send(data)
-			return
-		})
-		.catch((err) => {
-			res.status(err.status || 400).send({ message: err.message})
-			return
-		})
+  action(req, res)
+    .then((data) => {
+      res.status(200).send(data)
+      return
+    })
+    .catch((err) => {
+      res.status(err.status || 400).send({ message: err.message})
+      return
+    })
 }
 
 router.get('/', (req, res) => {
-	res.json({status: '/auth is running healthy.'})
+  res.json({status: '/auth is running healthy.'})
 })
 
 router.post('/signin', (req, res) => runAction(authController.signinAction, req, res))
